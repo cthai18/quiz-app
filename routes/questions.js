@@ -8,4 +8,17 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/add').post((req, res) => {
+    const newQuestion = new Question({
+        description: req.body.description,
+        quizId: req.body.quizId,
+        choices: req.body.choices,
+        correctAnswer: req.body.correctAnswer,
+    });
+
+    newQuestion.save()
+        .then(question => res.json(question))
+        .catch(err => res.status(400).json('Error: ' + err))
+});
+
 module.exports = router;
