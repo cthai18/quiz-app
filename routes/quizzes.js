@@ -18,4 +18,22 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err))
 });
 
+router.route('/edit/:id').post((req, res) => {
+    Quiz.findById(req.params.id)
+        .then(quiz => {
+            quiz.title = req.body.title;
+
+            quiz.save()
+                .then(quize => res.json(quiz))
+                .catch(err => res.status(400).json('Error: ' + err));
+        })
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/:id').delete((req, res) => {
+    Quiz.findByIdAndDelete(req.params.id)
+        .then(() => res.json('quiz deleted'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
 module.exports = router;
