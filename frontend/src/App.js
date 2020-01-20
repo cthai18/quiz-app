@@ -1,13 +1,30 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
-import { QuizList } from './components';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+import { QuizList, QuestionList } from './components';
 
 function App() {
   return (
-    <div className="App">
-      <h2>My Quizzes</h2>
-      <QuizList/>
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/quizzes/:id">
+            <QuestionList/>
+          </Route>
+          <Route path="/quizzes">
+            <QuizList/>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

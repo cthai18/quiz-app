@@ -18,6 +18,7 @@ export default class QuizList extends React.Component {
 
         return(
             <div className="container">
+                <h3>My Quizzes</h3>
                 {listItems}
             </div>
         )
