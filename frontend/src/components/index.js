@@ -3,6 +3,7 @@ import QuizListItem from './QuizListItem';
 import QuestionList from './QuestionList';
 import QuestionListItem from './QuestionListItem';
 import Play from './Play';
+import CreateQuiz from './CreateQuiz';
 
 export {
     QuizList,
@@ -10,4 +11,5 @@ export {
     QuestionList,
     QuestionListItem,
     Play,
+    CreateQuiz,
 }

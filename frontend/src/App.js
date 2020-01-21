@@ -9,7 +9,7 @@ import {
   Link
 } from "react-router-dom";
 
-import { QuizList, QuestionList, Play } from './components';
+import { QuizList, QuestionList, Play, CreateQuiz } from './components';
 
 function App() {
   return (
@@ -21,7 +21,10 @@ function App() {
           <Route path="/quizzes">
             <QuizList/>
           </Route>
-          <Route path="/">
+          <Route path="/create">
+              <CreateQuiz />
+          </Route>
+          <Route exact path="/">
             {/* TODO: replace with authentification screen */}
             <Link to="/quizzes">My Quizzes</Link>
           </Route>
