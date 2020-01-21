@@ -12,13 +12,13 @@ export default class QuestionList extends React.Component {
 
     render() {
 
-        const listItems = this.state.questionDesc.map((d) =>
-            <QuestionListItem desc={d}/>
+        const listItems = this.state.questionDesc.map((description) =>
+            <QuestionListItem desc={description}/>
         );
 
         return(
             <div className="container">
-                <h3>Questions for this Quiz</h3>
+                <h3>Questions </h3>
                 {listItems}
             </div>
         )

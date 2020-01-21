@@ -13,7 +13,7 @@ export default class QuizList extends React.Component {
     render() {
 
         const listItems = this.state.quizTitles.map((title) =>
-            <QuizListItem title={title}/>
+            <QuizListItem title={title} />
         );
 
         return(
