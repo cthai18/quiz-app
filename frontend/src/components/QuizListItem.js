@@ -38,7 +38,7 @@ class QuizListItem extends React.Component {
                     <h4 className="quizname">{this.props.title}</h4>
                     <div className="buttons">
                         <Button outline color="primary" className="mr-2" onClick={this.onClickView}>View</Button>
-                        <Button outline color="primary" classname="ml-2 mr-2" onClick={this.onClickPlay}>Play</Button>
+                        <Button outline color="primary" className="ml-2 mr-2" onClick={this.onClickPlay}>Play</Button>
                         <Button outline color="primary" className="ml-2" onClick={this.onClickDelete}>Delete</Button>
                     </div>
                 </div>
