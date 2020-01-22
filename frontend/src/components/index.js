@@ -4,6 +4,7 @@ import QuestionList from './QuestionList';
 import QuestionListItem from './QuestionListItem';
 import Play from './Play';
 import CreateQuiz from './CreateQuiz';
+import AppNavBar from './AppNavBar';
 
 export {
     QuizList,
@@ -12,4 +13,5 @@ export {
     QuestionListItem,
     Play,
     CreateQuiz,
+    AppNavBar,
 }

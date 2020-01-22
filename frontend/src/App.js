@@ -6,15 +6,16 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Redirect
 } from "react-router-dom";
 
-import { QuizList, QuestionList, Play, CreateQuiz } from './components';
+import { QuizList, QuestionList, Play, CreateQuiz, AppNavBar } from './components';
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <AppNavBar />
         <Switch>
           <Route path = "/quizzes/:id/play" component={Play}/>
           <Route path="/quizzes/:id" component={QuestionList}/>
@@ -26,7 +27,7 @@ function App() {
           </Route>
           <Route exact path="/">
             {/* TODO: replace with authentification screen */}
-            <Link to="/quizzes">My Quizzes</Link>
+            <Redirect to="/quizzes"/>
           </Route>
         </Switch>
       </div>
