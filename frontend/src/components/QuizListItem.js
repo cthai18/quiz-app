@@ -14,13 +14,17 @@ class QuizListItem extends React.Component {
         };
     }
 
+    componentDidMount() {
+        console.log(this.props);
+    }
+
     onClickView = () => {
-        this.setState({redirectUrl: "/quizzes/" + SAMPLE_QUIZ_ID});
+        this.setState({redirectUrl: "/quizzes/" + this.props.id});
         this.setState({redirect: true});
     }
 
     onClickPlay = () => {
-        this.setState({redirectUrl: "/quizzes/" + SAMPLE_QUIZ_ID + "/play"});
+        this.setState({redirectUrl: "/quizzes/" + this.props.id + "/play"});
         this.setState({redirect: true});
     };
 
@@ -45,7 +49,7 @@ class QuizListItem extends React.Component {
         )
     }
 
-    
+
 }
 
 export default QuizListItem

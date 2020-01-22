@@ -42,8 +42,8 @@ export default class QuizList extends React.Component {
 
         let listItems = (<Spinner size="lg" color="primary" />);
         if (!this.state.loading) {
-            listItems = this.state.quizzes.map((quiz) =>
-            <QuizListItem title={quiz.title} />);
+            listItems = this.state.quizzes.map(quiz =>
+            <QuizListItem key={quiz._id} id={quiz._id} title={quiz.title} />);
         }
 
 
