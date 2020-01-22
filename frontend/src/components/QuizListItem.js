@@ -15,7 +15,7 @@ class QuizListItem extends React.Component {
     }
 
     onClickPlay = () => {
-        this.setState({redirectUrl: "quizzes/" + SAMPLE_QUIZ_ID + "/play"});
+        this.setState({redirectUrl: "/quizzes/" + SAMPLE_QUIZ_ID + "/play"});
         this.setState({redirect: true});
     };
 

@@ -1,18 +1,16 @@
 import React from 'react';
 import './styles/Play.css';
 
-export default class Play extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+import { useParams } from 'react-router-dom';
 
-    render() {
-        let id = this.props.match.params.id;
+const Play = (props) => {
+    let { id } = useParams();
 
-        return(
-            <div className="container">
-                <p>this is the Play component for quiz {id}</p>
-            </div>
-        )
-    }
+    return(
+        <div className="container">
+            <p>this is the Play component for quiz {id}</p>
+        </div>
+    )
 }
+
+export default Play;
