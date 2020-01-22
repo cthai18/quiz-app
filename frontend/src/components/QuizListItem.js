@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles/QuizListItem.css';
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Button } from 'reactstrap';
 
 const SAMPLE_QUIZ_ID="samplequizid123"
@@ -12,6 +12,11 @@ class QuizListItem extends React.Component {
             redirect: false,
             redirectUrl: '',
         };
+    }
+
+    onClickView = () => {
+        this.setState({redirectUrl: "/quizzes/" + SAMPLE_QUIZ_ID});
+        this.setState({redirect: true});
     }
 
     onClickPlay = () => {
@@ -29,12 +34,13 @@ class QuizListItem extends React.Component {
         }
 
         return(
-                <div className="title">
-                    <Link to={"/quizzes/" + SAMPLE_QUIZ_ID}>
-                        {this.props.title}
-                    </Link>
-                    <Button outline color="primary" onClick={this.onClickPlay}>Play</Button>
-                    <Button outline color="primary" onClick={this.onClickDelete}>Delete</Button>
+                <div className="card shadow-sm">
+                    <h4 className="quizname">{this.props.title}</h4>
+                    <div className="buttons">
+                        <Button outline color="primary" className="mr-2" onClick={this.onClickView}>View</Button>
+                        <Button outline color="primary" classname="ml-2 mr-2" onClick={this.onClickPlay}>Play</Button>
+                        <Button outline color="primary" className="ml-2" onClick={this.onClickDelete}>Delete</Button>
+                    </div>
                 </div>
         )
     }

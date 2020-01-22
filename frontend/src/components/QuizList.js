@@ -9,7 +9,7 @@ export default class QuizList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            quizTitles: ["Quiz 1", "Quiz 2", "Quiz 3"],
+            quizTitles: ["Capitols Quiz", "Animated Shows", "Quiz 3"],
             redirect: false,
             redirectUrl: '',
         };
@@ -31,9 +31,9 @@ export default class QuizList extends React.Component {
 
         return(
             <div className="container">
-                <h3>My Quizzes</h3>
+                <h1 className="title">My Quizzes</h1>
                 {listItems}
-                <Button color="primary" onClick={this.onClickCreate}>Add New Quiz</Button>
+                <Button size="lg" color="primary" className="shadow-sm mt-3" onClick={this.onClickCreate}>Add New Quiz</Button>
             </div>
         )
     }
