@@ -1,9 +1,10 @@
 const router = require('express').Router();
 let Question = require('../models/question.model');
 
-router.route('/').get((req, res) => {
+router.route('/:quizId').get((req, res) => {
+    console.log(req.params.quizId);
     Question.find({
-            quizId: req.body.quizId
+            quizId: req.params.quizId
         })
         .then(questions => res.json(questions))
         .catch(err => res.status(400).json('Error: ' + err));

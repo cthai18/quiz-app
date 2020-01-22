@@ -3,8 +3,6 @@ import './styles/QuizListItem.css';
 import { Redirect } from "react-router-dom";
 import { Button } from 'reactstrap';
 
-const SAMPLE_QUIZ_ID="samplequizid123"
-
 class QuizListItem extends React.Component {
     constructor(props) {
         super(props);

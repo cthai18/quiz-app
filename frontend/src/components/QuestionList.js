@@ -1,26 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/QuestionList.css';
 import QuestionListItem from './QuestionListItem';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-export default class QuestionList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            questionDesc: ["What is the capitol of France", "What is the capitol of the US"]
-        };
-    }
+const QuestionList = () => {
+    let { id } = useParams();
+    const [questions, setQuestions] = useState([]);
+    const [loading, setLoading] = useState(true);
+    console.log("quizId: " + id);
+    useEffect(() => {
+        setLoading(true);
+        axios.get('/questions/' + id)
+        .then(res => {
+            console.log(res.data)
+            setQuestions(res.data);
+            setLoading(false);
+        })
+        .catch(err => {
+            setLoading(false);
+            console.error(err);
+        });
+    }, []);
 
-    render() {
+    const listItems = questions.map(question =>
+        <QuestionListItem 
+            key={question._id} 
+            id={question._id} 
+            desc={question.description}
+            quizId={question.quizId}
+            choices={question.choices}
+            correctAnswer={question.correctAnswer}
+        />
+    );
 
-        const listItems = this.state.questionDesc.map((description) =>
-            <QuestionListItem desc={description}/>
-        );
-
-        return(
-            <div className="container">
-                <h3>Questions </h3>
-                {listItems}
-            </div>
-        )
-    }
+    return(
+        <div className="container">
+            <h3>Questions </h3>
+            {listItems}
+        </div>
+    )
 }
+
+export default QuestionList
