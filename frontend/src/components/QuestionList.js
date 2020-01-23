@@ -35,7 +35,7 @@ const QuestionList = () => {
     );
 
     return(
-        <div className="container">
+        <div className="container-sm">
             <h3>Questions </h3>
             {listItems}
         </div>

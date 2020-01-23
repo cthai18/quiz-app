@@ -1,20 +1,25 @@
 import React from 'react';
 import './styles/QuestionListItem.css';
+import {
+    Button,
+    Card, 
+    CardText, 
+    CardTitle, 
+  } from 'reactstrap';
 
 const QuestionListItem = (props) => {
-    const choices = props.choices.map(choice => 
-        <li>{choice}</li>
+    const choices = props.choices.map((choice, index) => 
+        <li key={index}>{choice}</li>
     );
 
     return(
         <div>
-            <h2>I am a question list item</h2>
-            <p>This is my id: {props.id}</p>
-            <p>This is my quizId: {props.quizId}</p>
-            <p>This is my description: {props.desc}</p>
-            <ul>{choices}</ul>
-            <p>The correct answer is {props.correctAnswer}</p>
-
+            <Card className="question" body >
+                <CardTitle className="desc">{props.desc}</CardTitle>
+                <ul className="choices">{choices}</ul>
+                <CardText className="correct-answer">Correct Answer: {props.correctAnswer}</CardText>
+                <Button size="sm" color="primary">Edit</Button>
+            </Card>
         </div>
     )
 }
