@@ -69,7 +69,7 @@ const QuizList = () => {
     }
 
     return(
-        <div className="d-flex container">
+        <div className="d-flex container mb-4">
             <h1 className="title">My Quizzes</h1>
             {listItems}
             <Button size="lg" color="primary" className="shadow-sm mt-3" onClick={toggle}>Add New Quiz</Button>
