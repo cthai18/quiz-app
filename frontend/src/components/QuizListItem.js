@@ -1,53 +1,33 @@
 import React from 'react';
 import './styles/QuizListItem.css';
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Button } from 'reactstrap';
 
-class QuizListItem extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            redirect: false,
-            redirectUrl: '',
-        };
-    }
+const QuizListItem = (props) => {
+    let history = useHistory();
 
-    componentDidMount() {
-        console.log(this.props);
-    }
-
-    onClickView = () => {
-        this.setState({redirectUrl: "/quizzes/" + this.props.id});
-        this.setState({redirect: true});
-    }
-
-    onClickPlay = () => {
-        this.setState({redirectUrl: "/quizzes/" + this.props.id + "/play"});
-        this.setState({redirect: true});
+    const onClickView = () => {
+        history.push('/quizzes/' + props.id);
     };
 
-    onClickDelete = () => {
+    const onClickPlay = () => {
+        history.push('/quizzes/' + props.id + "/play");
+    };
+
+    const onClickDelete = () => {
         alert("Delete button clicked");
     };
 
-    render () {
-        if (this.state.redirect) {
-            return <Redirect to={this.state.redirectUrl}/>
-        }
-
-        return(
-                <div className="card shadow-sm">
-                    <h4 className="quizname">{this.props.title}</h4>
-                    <div className="buttons">
-                        <Button outline color="primary" className="mr-2" onClick={this.onClickView}>View</Button>
-                        <Button outline color="primary" className="ml-2 mr-2" onClick={this.onClickPlay}>Play</Button>
-                        <Button outline color="primary" className="ml-2" onClick={this.onClickDelete}>Delete</Button>
-                    </div>
-                </div>
-        )
-    }
-
-
+    return(
+        <div className="card shadow-sm">
+            <h4 className="quizname">{props.title}</h4>
+            <div className="buttons">
+                <Button outline color="primary" className="mr-2" onClick={onClickView}>View</Button>
+                <Button outline color="primary" className="ml-2 mr-2" onClick={onClickPlay}>Play</Button>
+                <Button outline color="primary" className="ml-2" onClick={onClickDelete}>Delete</Button>
+            </div>
+        </div>
+    )
 }
 
 export default QuizListItem

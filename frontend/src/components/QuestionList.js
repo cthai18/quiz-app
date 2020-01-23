@@ -5,10 +5,10 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 const QuestionList = () => {
-    let { id } = useParams();
+    const { id } = useParams();
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
-    console.log("quizId: " + id);
+
     useEffect(() => {
         setLoading(true);
         axios.get('/questions/' + id)
