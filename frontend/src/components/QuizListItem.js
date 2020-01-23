@@ -2,6 +2,7 @@ import React from 'react';
 import './styles/QuizListItem.css';
 import { useHistory } from "react-router-dom";
 import { Button } from 'reactstrap';
+import axios from 'axios';
 
 const QuizListItem = (props) => {
     let history = useHistory();
@@ -14,8 +15,18 @@ const QuizListItem = (props) => {
         history.push('/quizzes/' + props.id + "/play");
     };
 
+    const deleteQuiz = async () => {
+        try {
+            const res = await axios.delete('/quizzes/' + props.id);
+            console.log(res.data);
+            props.refresh();
+        } catch(err) {
+            console.error(err);
+        }
+    };
+
     const onClickDelete = () => {
-        alert("Delete button clicked");
+        deleteQuiz();
     };
 
     return(

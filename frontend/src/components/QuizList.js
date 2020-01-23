@@ -65,7 +65,7 @@ const QuizList = () => {
     let listItems = (<Spinner size="lg" color="primary" />);
     if (!loading) {
         listItems = quizzes.map(quiz =>
-        <QuizListItem key={quiz._id} id={quiz._id} title={quiz.title} />);
+        <QuizListItem key={quiz._id} id={quiz._id} title={quiz.title} refresh={fetchQuizzes}/>);
     }
 
     return(

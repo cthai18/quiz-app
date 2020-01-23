@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let Quiz = require('../models/quiz.model');
+let Question = require('../models/question.model');
 
 router.route('/').get((req, res) => {
     Quiz.find()
@@ -30,10 +31,18 @@ router.route('/edit/:id').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+const deleteQuizAndQuestions = async (req, res) => {
+    try {
+        await Quiz.findByIdAndDelete(req.params.id);
+        const obj = await Question.deleteMany({ quizId: req.params.id });
+        return res.json(obj);
+    } catch(err) {
+        return res.status(400).json('Error: ' + err);
+    }
+}
+
 router.route('/:id').delete((req, res) => {
-    Quiz.findByIdAndDelete(req.params.id)
-        .then(() => res.json('quiz deleted'))
-        .catch(err => res.status(400).json('Error: ' + err));
+    deleteQuizAndQuestions(req, res);
 });
 
 module.exports = router;
