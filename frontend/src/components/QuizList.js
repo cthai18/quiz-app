@@ -38,7 +38,6 @@ const QuizList = () => {
             setLoading(false);
             setNewTitle('');
         } catch (err){
-            setLoading(false);
             console.error(err);
         }
     }

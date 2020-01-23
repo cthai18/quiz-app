@@ -18,16 +18,10 @@ const AppNavBar = () => {
     return(
         <div>
             <Navbar color='dark' dark expand='sm' className='mb-5'>
-                <NavbarBrand href='/quizzes'>Quiz App</NavbarBrand>
+                <NavbarBrand href='/quizzes'>My Quizzes</NavbarBrand>
                 <NavbarToggler onClick={toggle} />  
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
-                        <NavItem>
-                            <NavLink href="/quizzes/">My Quizzes</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="/create/">Create New Quiz</NavLink>
-                        </NavItem>
                         <NavItem>
                             <NavLink href="#">Log Out</NavLink>
                         </NavItem>
