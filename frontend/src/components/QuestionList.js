@@ -4,7 +4,7 @@ import QuestionListItem from './QuestionListItem';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getQuizTitle, editQuizTitle } from '../actions/quizActions';
-import { getQuestions, addQuestion, editQuestion, deleteQuestion } from '../actions/questionActions';
+import { getQuestions, addQuestion } from '../actions/questionActions';
 import { 
     Spinner,
     Button,
@@ -127,10 +127,6 @@ const QuestionList = (props) => {
             <QuestionListItem 
                 key={question._id} 
                 id={question._id} 
-                desc={question.description}
-                quizId={question.quizId}
-                choices={question.choices}
-                correctAnswer={question.correctAnswer}
             />
         );
     }
@@ -141,7 +137,7 @@ const QuestionList = (props) => {
                 <h3>{quizTitle}</h3>
                 <Button size="sm" outline className="ml-2" color="primary" onClick={toggleEditTitle}>Edit Title</Button>
             </div>
-            <Button outline color="primary" onClick={toggleAddQuestion}>Add a New Question</Button>
+            <Button className="mt-3" outline color="primary" onClick={toggleAddQuestion}>Add a New Question</Button>
             {listItems}
             {editTitleModal}
             {addModal}
@@ -156,5 +152,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps, 
-    { getQuizTitle, editQuizTitle, getQuestions, addQuestion, editQuestion, deleteQuestion }
+    { getQuizTitle, editQuizTitle, getQuestions, addQuestion }
 )(QuestionList);
