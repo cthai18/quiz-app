@@ -2,8 +2,8 @@
 
 A Simple Quiz App 
 
-run these two commands in quiz-app directory to start the app:
-npm run server
+run these two commands in quiz-app directory to start the app:  
+npm run server  
 npm run frontend
 
 (MongoDB Atlas can take a bit to connect to, so if the page errors that it can't connect to localhost:5000, just refresh the page)
