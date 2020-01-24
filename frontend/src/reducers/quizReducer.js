@@ -3,11 +3,13 @@ import {
     ADD_QUIZ,
     DELETE_QUIZ,
     QUIZZES_LOADING,
+    GET_QUIZ_TITLE,
 } from '../actions/types';
 
 const initialState = {
     quizzes: [],
     loading: false,
+    quizTitle: ''
 };
 
 export default function(state = initialState, action) {
@@ -17,6 +19,11 @@ export default function(state = initialState, action) {
                 ...state,
                 quizzes: action.payload,
                 loading: false,
+            };
+        case GET_QUIZ_TITLE:
+            return {
+                ...state,
+                quizTitle: state.quizzes.filter(quiz => quiz._id === action.payload)[0].title,
             };
         case ADD_QUIZ:
             return {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_QUIZZES, ADD_QUIZ, DELETE_QUIZ, QUIZZES_LOADING } from './types';
+import { GET_QUIZZES, GET_QUIZ_TITLE, ADD_QUIZ, DELETE_QUIZ, QUIZZES_LOADING } from './types';
 
 export const getQuizzes = () => dispatch => {
     dispatch(setQuizzesLoading());
@@ -14,6 +14,13 @@ export const getQuizzes = () => dispatch => {
         .catch(err => {
             console.error(err); //TODO: something better than this
         });
+}
+
+export const getQuizTitle = id => dispatch => {
+    dispatch({
+        type: GET_QUIZ_TITLE,
+        payload: id
+    });
 }
 
 export const addQuiz = newTitle => dispatch => {
