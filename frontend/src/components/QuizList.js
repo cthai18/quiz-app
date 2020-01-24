@@ -13,33 +13,23 @@ import {
     Label, 
     Input 
 } from 'reactstrap';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { getQuizzes, addQuiz } from '../actions/quizActions';
 
-const QuizList = () => {
-    const [quizzes, setQuizzes] = useState([]);
-    const [loading, setLoading] = useState(true);
+
+const QuizList = (props) => {
+    const { quizzes, loading } = props.quiz;
+
     const [modal, setModal] = useState(false);
     const [newTitle, setNewTitle] = useState('');
 
     useEffect(() => {
-        fetchQuizzes();
+        props.getQuizzes();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const toggle = () => {
         setModal(!modal);
-    }
-
-    const fetchQuizzes = async () => {
-        setLoading(true);
-        try {
-            const res = await axios.get('/quizzes/');
-            console.log(res.data)
-            setQuizzes(res.data);
-            setLoading(false);
-            setNewTitle('');
-        } catch (err){
-            console.error(err);
-        }
     }
 
     const onChange = e => {
@@ -47,25 +37,14 @@ const QuizList = () => {
     };
 
     const onSubmit = e => {
-        console.log(newTitle);
-        axios.post('/quizzes/add', {
-            title: newTitle,
-            username: 'Alex' //TODO: CHANGE THIS HARDCODED NAME
-        })
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => {
-            console.error(err);
-        });
+        props.addQuiz(newTitle);
         toggle();
-        fetchQuizzes();
     };
 
     let listItems = (<Spinner size="lg" color="primary" />);
     if (!loading) {
         listItems = quizzes.map(quiz =>
-        <QuizListItem key={quiz._id} id={quiz._id} title={quiz.title} refresh={fetchQuizzes}/>);
+        <QuizListItem key={quiz._id} id={quiz._id} title={quiz.title}/>);
     }
 
     return(
@@ -92,4 +71,11 @@ const QuizList = () => {
     )
 }
 
-export default QuizList
+const mapStateToProps = state => ({
+    quiz: state.quiz,
+});
+
+export default connect(
+    mapStateToProps,
+    { getQuizzes, addQuiz }
+)(QuizList);
