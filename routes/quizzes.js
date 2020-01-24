@@ -8,6 +8,12 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/:id').get((req, res) => {
+    Quiz.findById(req.params.id)
+        .then(quiz => res.json(quiz))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route('/add').post((req, res) => {
     const newQuiz = new Quiz({
         title: req.body.title,
