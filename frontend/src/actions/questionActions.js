@@ -21,7 +21,7 @@ export const addQuestion = newQuestion => dispatch => {
         description: newQuestion.description,
         quizId: newQuestion.quizId,
         choices: newQuestion.choices,
-        correctAnswer: newQUestion.correctAnswer,
+        correctAnswer: newQuestion.correctAnswer,
     })
     .then(res => {
         console.log(res);

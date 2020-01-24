@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './styles/QuestionList.css';
 import QuestionListItem from './QuestionListItem';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getQuizTitle, editQuizTitle } from '../actions/quizActions';
+import { getQuestions, addQuestion, editQuestion, deleteQuestion } from '../actions/questionActions';
 import { 
+    Spinner,
     Button,
     Modal, 
     ModalHeader, 
@@ -20,27 +21,13 @@ import {
 const QuestionList = (props) => {
     const { id } = useParams();
     const quizTitle = props.quiz.quizzes.filter(quiz => quiz._id === id)[0].title;
+    const { questions, loading } = props.question;
 
     const [titleModalVis, setTitleModalVis] = useState(false);
     const [newTitle, setNewTitle] = useState(quizTitle);
 
-    //to be removed
-    const [questions, setQuestions] = useState([]);
-    const [loading, setLoading] = useState(true);
-
     useEffect(() => {
-        setLoading(true);
-        axios.get('/questions/' + id)
-        .then(res => {
-            console.log(res.data)
-            setQuestions(res.data);
-            setLoading(false);
-        })
-        .catch(err => {
-            setLoading(false);
-            console.error(err);
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        props.getQuestions(id);
     }, []);
 
     const toggleEditTitle = () => {
@@ -75,16 +62,20 @@ const QuestionList = (props) => {
         </Modal>
     );
 
-    const listItems = questions.map(question =>
-        <QuestionListItem 
-            key={question._id} 
-            id={question._id} 
-            desc={question.description}
-            quizId={question.quizId}
-            choices={question.choices}
-            correctAnswer={question.correctAnswer}
-        />
-    );
+    let listItems = (<Spinner size="lg" color="primary" />);
+    
+    if (!loading) {
+        listItems = questions.map(question =>
+            <QuestionListItem 
+                key={question._id} 
+                id={question._id} 
+                desc={question.description}
+                quizId={question.quizId}
+                choices={question.choices}
+                correctAnswer={question.correctAnswer}
+            />
+        );
+    }
 
     return(
         <div className="container-sm">
@@ -100,9 +91,10 @@ const QuestionList = (props) => {
 
 const mapStateToProps = state => ({
     quiz: state.quiz,
+    question: state.question,
 });
 
 export default connect(
     mapStateToProps, 
-    { getQuizTitle, editQuizTitle }
+    { getQuizTitle, editQuizTitle, getQuestions, addQuestion, editQuestion, deleteQuestion }
 )(QuestionList);
