@@ -4,17 +4,32 @@ import QuestionListItem from './QuestionListItem';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getQuizTitle } from '../actions/quizActions';
+import { getQuizTitle, editQuizTitle } from '../actions/quizActions';
+import { 
+    Button,
+    Modal, 
+    ModalHeader, 
+    ModalBody, 
+    ModalFooter, 
+    Form, 
+    FormGroup, 
+    Label, 
+    Input 
+ } from 'reactstrap';
 
 const QuestionList = (props) => {
     const { id } = useParams();
-    const { quizTitle } = props.quiz;
+    const quizTitle = props.quiz.quizzes.filter(quiz => quiz._id === id)[0].title;
+
+    const [titleModalVis, setTitleModalVis] = useState(false);
+    const [newTitle, setNewTitle] = useState(quizTitle);
+
+    //to be removed
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setLoading(true);
-        props.getQuizTitle(id);
         axios.get('/questions/' + id)
         .then(res => {
             console.log(res.data)
@@ -27,6 +42,38 @@ const QuestionList = (props) => {
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const toggleEditTitle = () => {
+        setTitleModalVis(!titleModalVis);
+    }
+
+    const onSubmitEditTitle = e => {
+        console.log("New edited title on submit: " + newTitle);
+        props.editQuizTitle(id, newTitle);
+        toggleEditTitle();
+    };
+
+    const onChangeTitle = e => {
+        setNewTitle(e.target.value);
+    }
+
+    const editTitleModal = (
+        <Modal isOpen={titleModalVis} toggle={toggleEditTitle}>
+            <ModalHeader toggle={toggleEditTitle}>Edit Quiz Name</ModalHeader>
+            <ModalBody>
+                <Form onSubmit={onSubmitEditTitle}>
+                    <FormGroup>
+                        <Label for="quizTitle">Title</Label>
+                        <Input type="text" name="quizTitle" id="quizTitle" value={newTitle} onChange={onChangeTitle}/>
+                    </FormGroup>
+                </Form>
+            </ModalBody>
+            <ModalFooter>
+                <Button color="primary" onClick={onSubmitEditTitle}>Submit</Button>
+                <Button color="secondary" onClick={toggleEditTitle}>Cancel</Button>
+            </ModalFooter>
+        </Modal>
+    );
 
     const listItems = questions.map(question =>
         <QuestionListItem 
@@ -41,8 +88,12 @@ const QuestionList = (props) => {
 
     return(
         <div className="container-sm">
-            <h3>{quizTitle}</h3>
+            <div style={{"display": "flex", "flexDirection": "row"}}>
+                <h3>{quizTitle}</h3>
+                <Button outline className="ml-2" color="primary" onClick={toggleEditTitle}>Edit Title</Button>
+            </div>
             {listItems}
+            {editTitleModal}
         </div>
     )
 }
@@ -53,5 +104,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps, 
-    { getQuizTitle }
+    { getQuizTitle, editQuizTitle }
 )(QuestionList);

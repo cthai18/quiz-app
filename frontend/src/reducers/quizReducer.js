@@ -1,15 +1,14 @@
 import {
     GET_QUIZZES,
     ADD_QUIZ,
+    EDIT_QUIZ_TITLE,
     DELETE_QUIZ,
     QUIZZES_LOADING,
-    GET_QUIZ_TITLE,
 } from '../actions/types';
 
 const initialState = {
     quizzes: [],
     loading: false,
-    quizTitle: ''
 };
 
 export default function(state = initialState, action) {
@@ -20,10 +19,15 @@ export default function(state = initialState, action) {
                 quizzes: action.payload,
                 loading: false,
             };
-        case GET_QUIZ_TITLE:
+        case EDIT_QUIZ_TITLE:
             return {
                 ...state,
-                quizTitle: state.quizzes.filter(quiz => quiz._id === action.payload)[0].title,
+                quizzes: state.quizzes.map(quiz => {
+                    if (quiz._id === action.payload.id) {
+                        quiz.title = action.payload.newTitle;
+                    }
+                    return quiz;
+                }),
             };
         case ADD_QUIZ:
             return {
