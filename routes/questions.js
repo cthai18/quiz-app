@@ -2,7 +2,6 @@ const router = require('express').Router();
 let Question = require('../models/question.model');
 
 router.route('/:quizId').get((req, res) => {
-    console.log(req.params.quizId);
     Question.find({
             quizId: req.params.quizId
         })

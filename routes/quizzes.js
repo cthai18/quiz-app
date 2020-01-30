@@ -31,7 +31,7 @@ router.route('/edit/:id').post((req, res) => {
             quiz.title = req.body.title;
 
             quiz.save()
-                .then(quize => res.json(quiz))
+                .then(quiz => res.json(quiz))
                 .catch(err => res.status(400).json('Error: ' + err));
         })
         .catch(err => res.status(400).json('Error: ' + err));

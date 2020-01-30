@@ -24,7 +24,9 @@ export default function(state = initialState, action) {
                 ...state,
                 questions: state.questions.map(question => {
                     if (question._id === action.payload._id) {
-                        question.title = action.payload.title;
+                        question.description = action.payload.description;
+                        question.choices = action.payload.choices;
+                        question.correctAnswer = action.payload.correctAnswer;
                     }
                     return question;
                 }),

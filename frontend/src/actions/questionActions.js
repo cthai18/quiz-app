@@ -5,7 +5,6 @@ export const getQuestions = id => dispatch => {
     dispatch(setQuestionsLoading());
     axios.get('/questions/' + id)
         .then(res => {
-            console.log(res);
             dispatch({
                 type: GET_QUESTIONS,
                 payload: res.data,
@@ -24,7 +23,6 @@ export const addQuestion = newQuestion => dispatch => {
         correctAnswer: newQuestion.correctAnswer,
     })
     .then(res => {
-        console.log(res);
         dispatch({
             type: ADD_QUESTION,
             payload: res.data,
@@ -36,7 +34,7 @@ export const addQuestion = newQuestion => dispatch => {
 }
 
 export const editQuestion = (id, updatedQuestion) => dispatch => {
-    axios.post('questions/edit/' + id, {
+    axios.post('/questions/edit/' + id, {
         description: updatedQuestion.description,
         choices: updatedQuestion.choices,
         correctAnswer: updatedQuestion.correctAnswer,
@@ -56,7 +54,6 @@ export const editQuestion = (id, updatedQuestion) => dispatch => {
 export const deleteQuestion = id => dispatch => {
     axios.delete('/questions/' + id)
         .then(res => {
-            console.log(res);
             dispatch({
                 type: DELETE_QUESTION,
                 payload: id,

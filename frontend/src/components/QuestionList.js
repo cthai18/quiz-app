@@ -38,7 +38,6 @@ const QuestionList = (props) => {
     }
 
     const onSubmitEditTitle = e => {
-        console.log("New edited title on submit: " + newTitle);
         props.editQuizTitle(id, newTitle);
         toggleEditTitle();
     };
@@ -85,8 +84,18 @@ const QuestionList = (props) => {
         toggleAddQuestion();
     };
 
-    let choicesList = choices.map(choice => (
-        <ListGroupItem>{choice}</ListGroupItem>
+    let choicesList = choices.map((choice, curIndex) => (
+        <ListGroupItem key={curIndex}>
+            <Button
+                className='remove-btn mr-2'
+                color='danger'
+                size='sm'
+                onClick={() => {
+                    setChoices(choices.filter((choice, index) => index !== curIndex ))
+                }}
+            >&times;</Button>
+            {choice}
+        </ListGroupItem>
     ));
 
     const addModal = (
@@ -104,7 +113,7 @@ const QuestionList = (props) => {
                     </ListGroup>
                     <FormGroup>
                         <Label className="mt-2" for="choices">Add Choices</Label>
-                        <Input name="choices" value={curChoice} onChange={e => {setCurChoice(e.target.value); console.log(curChoice)}}/>
+                        <Input name="choices" value={curChoice} onChange={e => {setCurChoice(e.target.value)}}/>
                         <Button className="mt-2" onClick={() => setChoices([...choices, curChoice])}>Add Choice</Button>
                     </FormGroup>
                     <FormGroup>
