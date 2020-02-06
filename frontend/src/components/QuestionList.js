@@ -53,7 +53,7 @@ const QuestionList = (props) => {
                 <Form onSubmit={onSubmitEditTitle}>
                     <FormGroup>
                         <Label for="quizTitle">Title</Label>
-                        <Input type="text" name="quizTitle" id="quizTitle" onChange={onChangeTitle}/>
+                        <Input type="text" name="quizTitle" id="quizTitle" value={newTitle} onChange={onChangeTitle}/>
                     </FormGroup>
                 </Form>
             </ModalBody>
