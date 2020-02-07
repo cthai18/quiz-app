@@ -12,7 +12,7 @@ import {
   Redirect
 } from "react-router-dom";
 
-import { QuizList, QuestionList, Play, CreateQuiz, AppNavBar } from './components';
+import { QuizList, QuestionList, Play, AppNavBar } from './components';
 
 function App() {
   return (
@@ -25,9 +25,6 @@ function App() {
             <Route path="/quizzes/:id" component={QuestionList}/>
             <Route path="/quizzes">
               <QuizList/>
-            </Route>
-            <Route path="/create">
-                <CreateQuiz />
             </Route>
             <Route exact path="/">
               {/* TODO: replace with authentification screen */}
