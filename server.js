@@ -16,9 +16,13 @@ connectDB();
 
 const quizzesRouter = require('./routes/quizzes');
 const questionsRouter = require('./routes/questions');
+const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 
 app.use('/quizzes', quizzesRouter);
 app.use('/questions', questionsRouter);
+app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
