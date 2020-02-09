@@ -1,12 +1,10 @@
 .container {
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
 }
 
 .title {
-    color: #007bff;
-    text-align: center;
+  color: #007bff;
+  text-align: center;
 }
-
-

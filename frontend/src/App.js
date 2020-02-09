@@ -1,9 +1,9 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
-import { Provider } from 'react-redux';
-import store from './store';
+import { Provider } from "react-redux";
+import store from "./store";
 
 import {
   BrowserRouter as Router,
@@ -12,7 +12,7 @@ import {
   Redirect
 } from "react-router-dom";
 
-import { QuizList, QuestionList, Play, AppNavBar } from './components';
+import { QuizList, QuestionList, Play, AppNavBar } from "./components";
 
 function App() {
   return (
@@ -21,14 +21,14 @@ function App() {
         <div className="App">
           <AppNavBar />
           <Switch>
-            <Route path = "/quizzes/:id/play" component={Play}/>
-            <Route path="/quizzes/:id" component={QuestionList}/>
+            <Route path="/quizzes/:id/play" component={Play} />
+            <Route path="/quizzes/:id" component={QuestionList} />
             <Route path="/quizzes">
-              <QuizList/>
+              <QuizList />
             </Route>
             <Route exact path="/">
               {/* TODO: replace with authentification screen */}
-              <Redirect to="/quizzes"/>
+              <Redirect to="/quizzes" />
             </Route>
           </Switch>
         </div>
