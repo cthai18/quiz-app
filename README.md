@@ -12,4 +12,4 @@ npm run frontend
 
 (MongoDB Atlas can take a bit to connect to, so if the page errors that it can't connect to localhost:5000, just refresh the page)
 
-I didn't have time to implement: users(and auth), or the play component.
+TODO: users(and finish auth), play component.
